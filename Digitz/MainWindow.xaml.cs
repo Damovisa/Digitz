@@ -84,8 +84,8 @@ namespace Digitz
                 graph.Import(File.ReadAllBytes("digits.pb"));
                 var session = new TFSession(graph);
                 var runner = session.GetRunner();
-                runner.AddInput(graph["input"][0], tensor);
-                runner.Fetch(graph["Model/model"][0]);
+                runner.AddInput(graph["x"][0], tensor);
+                runner.Fetch(graph["Model/prediction"][0]);
                 var output = runner.Run();
                 TFTensor result = output[0];
                 float[] p = ((float[][])result.GetValue(true))[0];
